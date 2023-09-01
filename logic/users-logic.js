@@ -3,7 +3,14 @@ const usersDal = require("../dal/users-dal");
 
 async function addUser(userRegistrationData){
     validateUserRegistrationData (userRegistrationData);
+    if(usersDal.isUserNameExist(userRegistrationData.userName)){
+        throw new Error("User name alredy exist");
+    }
    await usersDal.addUser(userRegistrationData);
+}
+
+async function getUserById(id){
+    return usersDal.getUserById(id);
 }
 
 function validateUserRegistrationData(userRegistrationData){
@@ -23,5 +30,6 @@ function validateUserRegistrationData(userRegistrationData){
 
 //without this you will get an error that says that you does not have function
 module.exports = {
-    addUser
+    addUser,
+    getUserById
 }

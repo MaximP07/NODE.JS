@@ -17,4 +17,18 @@ router.post("/", async (request, response, next) => {
     }
 });
 
+router.get("/:id", async (request, response, next) => {
+    // Extracting the JSON from the packet's BODY
+    let id = request.params.id;
+    
+    try {
+        let user = await usersLogic.getUserById(id);
+        response.json(user);
+    }
+    catch (e) {
+        console.error(e);
+        response.status(600).send(e.message)
+    }
+});
+
 module.exports = router;
