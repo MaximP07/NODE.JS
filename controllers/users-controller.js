@@ -1,5 +1,5 @@
 const express = require("express");
-const usersLogic = require("");
+const usersLogic = require("../logic/users-logic");
 const router = express.Router();
 
 router.post("/", async (request, response, next) => {
